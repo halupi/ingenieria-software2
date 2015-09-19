@@ -1,3 +1,7 @@
 var express = require("express");
-require("./routes/index");
-console.log( require("./routes") );
+var app = express();
+
+require("./modules/system/globals");
+require( fn.MODULE("system/models") );
+
+app.listen(8080);
