@@ -9,6 +9,6 @@ exports.REQUEST = file => `${ exports.DOCUMENT_ROOT }/request/${ file }`;
 exports.DIR = dir => `${ exports.DOCUMENT_ROOT }/${ dir }`;
 
 exports.env = {
-	server: { port: 8080 }, 
+	server: { port: 8081 }, 
 	mongo: { host: "localhost", port: 27017, name: "fciencias" } 
 }
