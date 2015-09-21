@@ -88,3 +88,6 @@ Si queremos hacer que al ingresar a la ruta */hello/world* nos imprima el texto 
 * Ahora tenemos que definir la ruta y decirle que archivo de la carpeta request va a ocupar.
  * Como se va a visualizar en el navegador se trata de una petición GET, y como el archivo que queremos ocupar es *test/hello.js* por lo tanto se traduce a "test.hello", quedando de la siguiente forma:
  * ```exports.get = { "/hello/world": "test.hello" }``` 
+
+## Ejecución del proyecto
+Ubicados en la raíz del proyecto ejecutamos lo siguiente: `nodemon app/app.js`.
