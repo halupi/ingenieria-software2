@@ -1,5 +1,5 @@
 ## Requerimientos
-* Node.js v0.12
+* Node.js v4.0 o mayor
   * gcc
   * g++
   * make
@@ -7,6 +7,7 @@
 * Redis v3.0
 * NPM (viene includo en la instalación de Node.js)
 * Bower
+* Nodemon
 
 ## Instalación
 La siguiente guía de instalación está basada en sistemas operativos Linux.
@@ -49,3 +50,41 @@ NPM es una herramienta para instalar módulos de Node.js y viene por default en 
 
 Al terminar la instalación tendremos a disposición el comando bower (se puede probar similar a node, `bower -v`).
 
+### MongoDB
+El proceso de instalación depende de cada sistema operativo por lo cual en la página oficial de MongoDB viene con detalle cómo instalarlo según el sistema operativo que tengan. Pueden consultar [el proceso de instalación en el siguiente enlace](http://docs.mongodb.org/manual/installation/)
+
+Una vez instalado tendremos a nuestra disposición los comandos *mongo* y *mongod*.
+
+Es posible que tengamos que iniciar MongoDB manualmente (en cada reinicio de máquina por ejemplo), por lo cuál las instrucciones para hacerlo son las siguientes:
+
+1. Si es la primera vez que vas a ejecutar MongoDB debemos tener una carpeta llamada data en la raíz del sistema. La podemos crear con la siguiente instruccion: `sudo mkdir -p /data/db`
+2. Para iniciar el proceso de MongoDB en terminal tenemos que ejecutar lo siguiente: `sudo mongod`
+3. Para abrir la consola de MongoDB (donde se realizan consultas y demás cosas de administración) lo podemos hacer ejecutando lo siguiente: `mongo`
+
+### Nodemon
+Es una herramienta que recarga automáticamente el servidor si alguno de sus archivos es modificado. Se instala vía NPM y se hace de la siguiente manera: `sudo npm install -g nodemon`.
+
+## Estructura del proyecto
+En general, la estructura se divide en 2 partes; **app** y **public**.
+
+### App
+Aquí se encuentran todos los archivos relacionados con el servidor; rutas, manejadores, base de datos, ect. A continuación mencionaré para que sirve cada uno:
+
+* **modules**: Contiene código auxiliar, funciones, objetos, etc, independientes de la lógica de los modelos o de las rutas, como por ejemplo parsear un archivo Excel, tener información global, hacer cálculos estadísticos, etc.
+* **schemas**: Contiene las definiciones de las entidades que participan en la base de datos. Se definen mediante JSON y se pueden agregar validaciones o referencias hacia otros schemas. Más información en el [siguiente enlace](http://mongoosejs.com/docs/guide.html).
+* **models**: Son instancias de los schemas y además se les puede agregar métodos que sean parte de la lógica del modelo. Más información en el [siguiente enlace](http://mongoosejs.com/docs/models.html).
+* **routes**: Contiene las definiciones de las rutas disponibles en el sistema, por ejemplo */login*, */index*, etc. Cada archivo debe contener las deficiones necesarias de GET, POST, DELETE y PUT con el siguiente formato:
+ * ``` { ruta: "carpeta.carpeta.carpeta...carpeta.archivo" } ```
+* **request**: Contiene la lógica que se va a ejecutar en la ruta que especificamos. Deben ser funciones que contengan 2 parámetros; *request y response*.
+ * ```module.exports = function(request, response){ /* Código */ }```
+ 
+Para resaltar el uso de las carpetas **request** y **routes** veamos el siguiente ejemplo:
+
+Si queremos hacer que al ingresar a la ruta */hello/world* nos imprima el texto "hello world", hariamos lo siguiente:
+
+* Crear el archivo request con cualquier nombre, digamos *hello.js*, y lo asignaremos a la carpeta test (esto para organizarlos ya que tendremos tantos archivos como rutas definamos).
+* El contenido del archivo */request/test/hello.js* debería ser el siguiente:
+ * ```module.exports = function(request, response){ response.end("Hello World"); }```
+* Ahora tenemos que definir la ruta y decirle que archivo de la carpeta request va a ocupar.
+ * Como se va a visualizar en el navegador se trata de una petición GET, y como el archivo que queremos ocupar es *test/hello.js* por lo tanto se traduce a "test.hello", quedando de la siguiente forma:
+ * ```exports.get = { "/hello/world": "test.hello" }``` 
