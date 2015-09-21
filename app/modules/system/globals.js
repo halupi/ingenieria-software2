@@ -4,3 +4,5 @@ global.requireDir = require("require-directory");
 global.Schema = mongoose.Schema;
 global.Types = mongoose.Types;
 global.Model = {};
+
+console.log("\nSetting global variables...");

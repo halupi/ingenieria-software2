@@ -1,0 +1,1 @@
+mongoose.connect(`mongodb://${ fn.env.mongo.host }:${ fn.env.mongo.port }/${ fn.env.mongo.name }`);
