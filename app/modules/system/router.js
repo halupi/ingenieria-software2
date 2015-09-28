@@ -9,7 +9,7 @@ module.exports = function(app) {
 	console.log("\nLoading routes...");
 
 	for( let file in routes ) {
-		console.log(`\tProcessing ${file}.js`);
+		console.log(`\n\tProcessing ${file}.js`);
 		let total = 0, failed = 0;
 
 		for( let method in routes[file] ) {
@@ -19,20 +19,21 @@ module.exports = function(app) {
 
 				if( typeof request === "string" )
 					request = request.replace(/([.])/g, "/");
-				else {
+				else if( typeof request !== "function" ){
 					failed++;
 					console.log(`\t\t${path} => Failed at parsing.`);
 					continue;
 				}
 
 				try {
-					let instance = require( fn.REQUEST(request) );
+					let instance = typeof request === "string" ? require( fn.REQUEST(request) ) : request;
 					let handler = (request, response) => instance(request, response);
 
 					Router[method](path, handler);
 				} catch(err) {
 					failed++;
-					console.log(`\t\t${path} => Failed at loading request.`)
+					//console.log(err);
+					console.log(`\t\t${method.toUpperCase()} ${path} => Failed at loading request.`)
 				}
 			}
 		}

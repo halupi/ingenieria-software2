@@ -1,0 +1,8 @@
+include ../layout/macros.jade
+
+.page-header
+	h2 Nuevo Curso
+
+form.form-horizontal( name="form" ng-submit="save()" )
+	+input("Nombre", { input: { "ng-model": "course.name" } })
+	+button("Guardar", { button: { class: "btn-success" } })

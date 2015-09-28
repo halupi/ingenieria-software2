@@ -1,0 +1,60 @@
+mixin link(href)
+	link( type="text/css" rel="stylesheet" href="#{ href }.css" )
+
+mixin script(src)
+	script( type="text/javascript"  src="#{ src }.js" )
+
+mixin formGroup(attrs)
+	- attrs = attrs || {}
+	.form-group&attributes( attrs )
+		if block
+			block
+
+mixin formLabel(text, attrs)
+	- attrs = attrs || {}
+	- attrs.group = attrs.group || {}
+	- attrs.label = attrs.label || { class: "col-sm-2" }
+	+formGroup( attrs.group )
+		label.control-label&attributes( attrs.label ) #{text}
+		if block
+			block
+
+mixin input(text, attrs)
+	- attrs = attrs || {}
+	- attrs.container = attrs.container  || { class: "col-sm-10" }
+	- attrs.input = attrs.input || { type: "text" }
+	+formLabel( text, attrs )
+		div&attributes( attrs.container )
+			- if( attrs.input["ng-model"] && !attrs.input.name ) attrs.input.name = attrs.input["ng-model"]
+			input.form-control&attributes( attrs.input )
+			if block
+				block
+
+mixin textArea(text, attrs)
+	- attrs = attrs || {}
+	- attrs.container = attrs.container  || { class: "col-sm-10" }
+	- attrs.text = attrs.text || { type: "text" }
+	+formLabel( text, attrs )
+		div&attributes( attrs.container )
+			- if( attrs.text["ng-model"] && !attrs.text.name ) attrs.text.name = attrs.text["ng-model"]
+			textArea.form-control&attributes( attrs.text )
+			if block
+				block
+
+mixin select(text, attrs)
+	- attrs = attrs || { select: {} }
+	- attrs.container = attrs.container || { class: "col-sm-10" }
+	+formLabel( text, attrs )
+		div&attributes( attrs.container )
+			- if( attrs.select["ng-model"] && !attrs.select.name ) attrs.select.name = attrs.select["ng-model"]
+			select.form-control&attributes( attrs.select )
+				if block
+					block
+
+mixin button(text, attrs)
+	- attrs = attrs || {}
+	- attrs.container = attrs.container = { class: "col-sm-10 col-sm-offset-2" }
+	- attrs.button = attrs.button || { class: "btn-default", type: "submit" }
+	+formGroup( attrs.group )
+		div&attributes( attrs.container )
+			button.btn&attributes( attrs.button ) #{text}

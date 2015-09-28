@@ -1,0 +1,12 @@
+include macros.jade
+
+doctype
+html( ng-app="fciencias" )
+	head
+		include styles.jade
+	body
+		div( ui-view )
+
+		include scripts.jade
+		+script("/js/states/professor")
+		+script("/js/config/states")

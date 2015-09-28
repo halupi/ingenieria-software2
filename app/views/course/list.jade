@@ -1,0 +1,10 @@
+.page-header
+	h2 Mis Cursos
+
+table.table.table-hover( ng-init="fetch()" )
+	thead
+		tr
+			th Nombre
+	tbody
+		tr( ng-repeat="course in courses" )
+			td {{ course.name }}

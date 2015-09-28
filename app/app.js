@@ -4,6 +4,8 @@ var app = express();
 require("./modules/system/globals");
 require( fn.MODULE("system/database") );
 require( fn.MODULE("system/models") );
+require( fn.MODULE("system/middleware") )( app );
+require( fn.MODULE("system/view") )( app );
 require( fn.MODULE("system/router") )( app );
 
 app.listen( fn.env.server.port );
