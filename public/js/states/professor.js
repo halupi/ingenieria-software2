@@ -1,4 +1,9 @@
 var states = {
+	"index": {
+		url: "/",
+		templateUrl: "/view/index.index"
+	},
+
 	"course": {
 		abstract: true,
 		url: "/course",
