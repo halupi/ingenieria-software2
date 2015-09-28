@@ -90,4 +90,11 @@ Si queremos hacer que al ingresar a la ruta */hello/world* nos imprima el texto 
  * ```exports.get = { "/hello/world": "test.hello" }``` 
 
 ## Ejecución del proyecto
-Ubicados en la raíz del proyecto ejecutamos lo siguiente: `nodemon app/app.js`.
+Antes de iniciar la ejecución debemos de asegurarnos que tenemos los módulos necesarios para Node.js y las bibliotecas como Boostrap, JQuery, etc del lado del cliente:
+
+```
+npm install
+bower install
+```
+
+Por último, ubicados en la raíz del proyecto ejecutamos lo siguiente: `nodemon app/app.js`.
