@@ -1,8 +1,60 @@
 include ../layout/macros.jade
 
-.page-header
-	h2 Nuevo Curso
-
 form.form-horizontal( name="form" ng-submit="save()" )
-	+input("Nombre", { input: { "ng-model": "course.name" } })
+	fieldset
+		legend: strong I. INFORMACIÓN PARA LA OPERACIÓN Y LOGÍSTICA
+		+formLabel("Tipo de actividad académica")
+			.col-sm-10
+				.radio
+					label
+						input(type="radio" name="academic_activity" value="Taller" ng-model="course.logistical.academic_activity")
+						| Taller
+				.radio
+					label
+						input(type="radio" name="academic_activity" value="Curso" ng-model="course.logistical.academic_activity")
+						| Curso
+				.radio
+					label
+						input(type="radio" name="academic_activity" value="Diplomado" ng-model="course.logistical.academic_activity")
+						| Diplomado
+				.radio
+					label
+						input(type="radio" name="academic_activity" value="Seminario" ng-model="course.logistical.academic_activity")
+						| Seminario
+				.radio
+					label
+						input(type="radio" name="academic_activity" value="Otro" ng-model="course.logistical.academic_activity")
+						| Otro
+				.radio( ng-if="course.logistical.academic_activity === 'Otro'")
+					label.col-sm-10
+						input.form-control(type="text" ng-model="course.logistical.academic_activity_other")
+		+formLabel("Modalidad")
+			.col-sm-10
+				.radio
+					label
+						input(type="radio" name="modality" value="Presencial" ng-model="course.logistical.modality")
+						| Presencial
+				.radio
+					label
+						input(type="radio" name="modality" value="Semi-Presencial" ng-model="course.logistical.modality")
+						| Semi-Presencial
+				.radio
+					label
+						input(type="radio" name="modality" value="En línea" ng-model="course.logistical.modality")
+						| En línea
+		+formLabel("Fechas")
+			.col-sm-10
+				.col-sm-6
+					.input-group
+						.input-group-addon: i.glyphicon.glyphicon-calendar
+						input.form-control(type="text" placeholder="Fecha de Inicio" ng-model="course.logistical.vigency.start")
+				.col-sm-6
+					.input-group
+						.input-group-addon: i.glyphicon.glyphicon-calendar
+						input.form-control(type="text" placeholder="Fecha de Fin" ng-model="course.logistical.vigency.end")
+		+input("Días y horarios", { input: { "ng-model": "course.logistical.schedule" } })
+		+input("Lugar", { input: { "ng-model": "course.logistical.place" } })
+		+input("Número de sesiones", { container: { class: "col-sm-4" }, input: { "ng-model": "course.logistical.number_sessions" } })
+		+input("Número de horas por sesión", { container: { class: "col-sm-4" }, input: { "ng-model": "course.logistical.number_hours" } })
+		+input("Número total de horas", { container: { class: "col-sm-4" }, input: { "ng-model": "totalHours()", readonly:"true" } })
 	+button("Guardar", { button: { class: "btn-success" } })

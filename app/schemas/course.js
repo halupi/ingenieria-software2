@@ -14,8 +14,9 @@ var TeachingSchema = new Schema({
 });
 
 var CourseSchema = new Schema({
-	logistical_info: {
+	logistical: {
 		academic_activity: { type: String, required: true },
+		academic_activity_other: { type: String },
 		modality: { type: String, required: true },
 		vigency: { start: { type: Date, required: true }, end: { type: Date, required: true } },
 		schedule: { type: String, required: true },
@@ -34,7 +35,7 @@ var CourseSchema = new Schema({
 		publicity: { type: String, required: true }
 	},
 
-	academic_info: {
+	academic: {
 		description: { type: String, required: true },
 		general_purpose: { type: String, required: true },
 		specific_purpose: { type: String, required: true },
