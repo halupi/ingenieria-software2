@@ -1,4 +1,15 @@
 var CourseController = function($scope, Restangular, $state) {
+	$scope.course = {
+		logistical: { 
+			academic_activity: "Taller",
+			modality: "Presencial",
+			number_sessions: 0,
+			number_hours: 0,
+			vigency: {} 
+		},
+		academic: {}
+	}
+
 	$scope.fetch = function() {
 		Restangular.one("api", "v1")
 			.customGET("course")
@@ -20,7 +31,7 @@ var CourseController = function($scope, Restangular, $state) {
 			});
 	}
 
-	$scope.totalHours = function(){ 
+	$scope.totalHours = function() {
 		return $scope.course.logistical.number_sessions * $scope.course.logistical.number_hours;
 	}
 }
