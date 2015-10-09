@@ -30,6 +30,28 @@ mixin input(text, attrs)
 			if block
 				block
 
+mixin inputAddon(attrs)
+	- attrs = attrs || {}
+	- attrs.input = attrs.input || { type: "text" }
+	- attrs.icon = attrs.icon || {}
+	.input-group
+		if attrs.icon.left
+			span.input-group-addon
+				i( class!=attrs.icon.left )
+		input.form-control&attributes( attrs.input )
+		if attrs.icon.right
+			span.input-group-addon
+				i( class!=attrs.icon.right )
+
+mixin inputLabelAddon(text, attrs)
+	- attrs = attrs || {}
+	- attrs.container = attrs.container  || { class: "col-sm-10" }
+	- attrs.input = attrs.input || { type: "text" }
+	- attrs.icon = attrs.icon || {}
+	+formLabel( text, attrs )
+		div&attributes( attrs.container )
+			+inputAddon( attrs )
+
 mixin textArea(text, attrs)
 	- attrs = attrs || {}
 	- attrs.container = attrs.container  || { class: "col-sm-10" }

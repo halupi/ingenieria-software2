@@ -45,16 +45,53 @@ form.form-horizontal( name="form" ng-submit="save()" )
 		+formLabel("Fechas")
 			.col-sm-10
 				.col-sm-6
-					.input-group
-						.input-group-addon: i.glyphicon.glyphicon-calendar
-						input.form-control(type="text" placeholder="Fecha de Inicio" ng-model="course.logistical.vigency.start")
+					+inputAddon({ 
+						icon: { left: "glyphicon glyphicon-calendar" } 
+					})
 				.col-sm-6
-					.input-group
-						.input-group-addon: i.glyphicon.glyphicon-calendar
-						input.form-control(type="text" placeholder="Fecha de Fin" ng-model="course.logistical.vigency.end")
+					+inputAddon({ 
+						icon: { left: "glyphicon glyphicon-calendar" } 
+					})
 		+input("Días y horarios", { input: { "ng-model": "course.logistical.schedule" } })
 		+input("Lugar", { input: { "ng-model": "course.logistical.place" } })
-		+input("Número de sesiones", { container: { class: "col-sm-4" }, input: { "ng-model": "course.logistical.number_sessions" } })
-		+input("Número de horas por sesión", { container: { class: "col-sm-4" }, input: { "ng-model": "course.logistical.number_hours" } })
-		+input("Número total de horas", { container: { class: "col-sm-4" }, input: { value: "{{ totalHours() }}", readonly:"true" } })
+		+input("Número mínimo de inscritos", { 
+			container: { class: "col-sm-4" }, 
+			input: { "ng-model": "course.logistical.min_registered" } 
+		})
+		+input("Número máximo de inscritos", { 
+			container: { class: "col-sm-4" }, 
+			input: { "ng-model": "course.logistical.max_registered" } 
+		})
+		+input("Número de sesiones", { 
+			container: { class: "col-sm-4" }, 
+			input: { "ng-model": "course.logistical.number_sessions" } 
+		})
+		+inputLabelAddon("Número de horas por sesión", { 
+			container: { class: "col-sm-4" }, 
+			input: { "ng-model": "course.logistical.number_hours" }, 
+			icon: { left: "glyphicon glyphicon-time" } 
+		})
+		+inputLabelAddon("Número total de horas", { 
+			container: { class: "col-sm-4" }, 
+			input: { value: "{{ totalHours() }}", readonly:"true" }, 
+			icon: { left: "glyphicon glyphicon-time" } 
+		})
+		+inputLabelAddon("Costo de inscripción para público en general", { 
+			container: { class: "col-sm-4" }, 
+			icon: { left: "glyphicon glyphicon-usd" } 
+		})
+		+inputLabelAddon("Costo de inscripción para alumnos, tesistas y personal de la UNAM", { 
+			container: { class: "col-sm-4" }, 
+			icon: { left: "glyphicon glyphicon-usd" } 
+		})
+		+inputLabelAddon("Pago propuesto a docentes", { 
+			container: { class: "col-sm-4" }, 
+			icon: { left: "glyphicon glyphicon-usd" } 
+		})
+		+input("Material de apoyo requerido durante las clases")
+		+input("Equipo de cómputo y software requerido")
+		+input("Material requerido a los alumnos")
+		+input("Material de apoyo para los alumnos")
+	fieldset
+		legend: strong II. INFORMACIÓN ACADÉMICA
 	+button("Guardar", { button: { class: "btn-success" } })
